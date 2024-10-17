@@ -7,7 +7,7 @@ import { singOutAction } from '../auth.actions';
 export const SignOutButton = () => {
   return (
     <form action={singOutAction} className="shrink-0">
-      <SubmitButton variant="primary">
+      <SubmitButton variant="secondary">
         <IconLogout size={20} />
         Sign Out
       </SubmitButton>

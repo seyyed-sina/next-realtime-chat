@@ -1,9 +1,15 @@
 import { memo, PropsWithChildren } from 'react';
 
-type MainLayoutProps = PropsWithChildren
+import { Providers } from '@components';
+
+type MainLayoutProps = PropsWithChildren;
 
 export const MainLayout = memo(({ children }: MainLayoutProps) => {
-  return <main>{children}</main>;
+  return (
+    <Providers>
+      <main>{children}</main>
+    </Providers>
+  );
 });
 
 MainLayout.displayName = 'MainLayout';
