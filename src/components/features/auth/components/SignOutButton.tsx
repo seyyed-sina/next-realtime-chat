@@ -13,6 +13,8 @@ export const SignOutButton = () => {
       </SubmitButton>
     </form>
   );
+
+  
 };
 
 SignOutButton.displayName = 'SignOutButton';
