@@ -12,19 +12,22 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": ".",
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
+      "@/lib/*": ["./src/lib/*"],
       "@/components/*": ["./src/components/*"],
+      "@/features/*": ["./src/components/features/*"],
       "@components": ["./src/container/components.ts"],
       "@constants": ["./src/container/constants.ts"],
       "@types": ["./src/container/types.ts"],
       "@hooks": ["./src/container/hooks.ts"],
-      "@utils": ["./src/container/utils.ts"]
+      "@utils": ["./src/container/utils.ts"],
+      "@/styles/*": ["./src/styles/*"]
     }
   },
   "include": [

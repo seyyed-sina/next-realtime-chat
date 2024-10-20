@@ -71,6 +71,7 @@
     "sonarjs/pseudo-random": "warn",
     "sonarjs/prefer-nullish-coalescing": "warn",
     "sonarjs/cognitive-complexity": ["warn", 20],
+    "sonarjs/no-misused-promises": "off",
     "import/order": [
       "warn",
       {

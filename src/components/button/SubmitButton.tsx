@@ -9,11 +9,10 @@ import { clx } from '@utils';
 type Props = TButtonProps & {
   spinnerFill?: string;
   isSubmitting?: boolean;
-  label?: null; // Expect this prop to be set to null
 };
 
 export const SubmitButton: FC<Props> = memo(
-  ({ children, spinnerFill, ...props }) => {
+  ({ children, label, spinnerFill, ...props }) => {
     const { pending } = useFormStatus();
     const isSubmitting = props.isSubmitting || pending;
 
@@ -29,7 +28,7 @@ export const SubmitButton: FC<Props> = memo(
             isSubmitting && 'opacity-0',
             props.className,
           )}>
-          {children}
+          {label ?? children}
         </span>
         {isSubmitting && (
           <span className="absolute inset-0 m-auto flex justify-center items-center text-center">

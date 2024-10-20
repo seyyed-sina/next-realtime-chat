@@ -64,7 +64,7 @@ const authOptions = {
       return routes.HOME;
     },
   },
-  debug: process.env.NODE_ENV !== 'production',
+  debug: false,
 } satisfies NextAuthConfig;
 
 export const { handlers, signIn, signOut, auth } = NextAuth(authOptions);

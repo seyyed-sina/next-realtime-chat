@@ -3,8 +3,8 @@ import { ButtonHTMLAttributes, memo, ReactNode, useMemo } from 'react';
 import { cva, VariantProps } from 'cva';
 import Link, { LinkProps } from 'next/link';
 
-import { XOR } from '@/types/global';
-import { clx } from '@/utils/helper';
+import { XOR } from '@types';
+import { clx } from '@utils';
 
 const buttonVariants = cva({
   base: 'flex items-center justify-center text-center select-none rounded-lg relative group overflow-hidden transition-all duration-300 border-none',

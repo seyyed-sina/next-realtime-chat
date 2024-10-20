@@ -1,6 +1,6 @@
 import { MainLayout } from '@components';
 import { poppins } from '@constants';
-import './globals.css';
+import '@/styles/globals.scss';
 
 export default function RootLayout({
   children,

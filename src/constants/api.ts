@@ -1,4 +1,3 @@
 export const apiEndpoints = {
-  base: "https://api.github.com",
-  graphql: "https://api.github.com/graphql",
+  ADD_FRIEND: '/api/friends/add',
 } as const;
