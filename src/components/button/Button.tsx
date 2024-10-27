@@ -6,10 +6,11 @@ import Link, { LinkProps } from 'next/link';
 import { XOR } from '@types';
 import { clx } from '@utils';
 
-const buttonVariants = cva({
+export const buttonVariants = cva({
   base: 'flex items-center justify-center text-center select-none rounded-lg relative group overflow-hidden transition-all duration-300 border-none',
   variants: {
     variant: {
+      empty: 'bg-transparent !p-0',
       primary: 'bg-primary text-white hover:bg-primary-500',
       secondary: 'bg-secondary text-white hover:bg-secondary-500',
     },

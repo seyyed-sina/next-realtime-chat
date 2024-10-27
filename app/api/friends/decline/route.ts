@@ -16,7 +16,6 @@ export const POST = async (req: Request) => {
   };
   try {
     const session = await auth();
-    console.log('session in add form: ', session);
 
     if (!session) {
       return NextResponse.json({

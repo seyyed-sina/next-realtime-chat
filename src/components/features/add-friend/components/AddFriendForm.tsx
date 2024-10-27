@@ -1,10 +1,10 @@
 'use client';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
+import { mutateData } from '@adapter';
 import { FormField, FormValidation, SubmitButton } from '@components';
 import { apiEndpoints } from '@constants';
 
@@ -15,7 +15,7 @@ export const AddFriendForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<AddFriendFormProps>({
     resolver: zodResolver(addFriendSchema),
     defaultValues: {
@@ -23,45 +23,35 @@ export const AddFriendForm = () => {
     },
   });
 
-  const submitData = async (email: string) => {
-    console.log('email: ', email);
-    const validEmail = addFriendSchema.parse({ email });
-    console.log('validEmail: ', validEmail);
+  const submitData = async (email: AddFriendFormProps) => {
+    const validEmail = addFriendSchema.parse(email);
 
     try {
-      const res = await fetch(apiEndpoints.ADD_FRIEND, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          accept: 'application/json',
-        },
+      const res = await mutateData<number>(apiEndpoints.ADD_FRIEND, {
         body: JSON.stringify(validEmail),
       });
 
-      const data = await res.json();
-      console.log('data: ', data);
+      if (res.error) {
+        throw new Error(res.message);
+      }
 
       toast.success('Friend request sent');
     } catch (error) {
-      console.log('error: ', error);
-      if (error instanceof z.ZodError) {
-        return;
-      }
-      if (error instanceof Error) {
+      if (error instanceof z.ZodError || error instanceof Error) {
         toast.error(error.message);
       }
+      console.log('error: ', error);
     }
   };
 
   const onSubmit: SubmitHandler<AddFriendFormProps> = async (data) => {
-    console.log('data: ', data);
-    await submitData(data.email);
+    await submitData(data);
   };
 
   return (
     <form
       noValidate
-      className="flex flex-col gap-2"
+      className="flex flex-col gap-2 max-w-md"
       onSubmit={handleSubmit(onSubmit)}>
       <FormField label="Add friend by email:" inputId="email" required>
         <input
@@ -73,7 +63,7 @@ export const AddFriendForm = () => {
         />
         <FormValidation message={errors.email?.message} />
       </FormField>
-      <SubmitButton label="Add" />
+      <SubmitButton label="Add" isSubmitting={isSubmitting} />
     </form>
   );
 };

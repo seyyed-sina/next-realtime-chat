@@ -1,8 +1,9 @@
+@use "sass:meta";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import 'core/form';
+@include meta.load-css('core/form');
 
 :root {
   --background: #ffffff;

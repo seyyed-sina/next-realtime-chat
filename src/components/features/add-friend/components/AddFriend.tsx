@@ -1,11 +1,10 @@
-import { AddFriendForm } from '@components';
+import { AddFriendForm, PageSection } from '@components';
 
 export const AddFriend = () => {
   return (
-    <section className="container">
-      <h1>Add a friend</h1>
+    <PageSection title="Add a friend">
       <AddFriendForm />
-    </section>
+    </PageSection>
   );
 };
 

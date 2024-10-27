@@ -3,12 +3,14 @@ import { env } from '@constants';
 const upstashBaseUrl = env.UPSTASH_REDIS_REST_URL;
 const upstashToken = env.UPSTASH_REDIS_REST_TOKEN;
 
-type Command = 'zrange' | 'sismember' | 'get' | 'smembers';
+export type TCommand = 'zrange' | 'sismember' | 'get' | 'smembers';
 
-export const fetchRedis = async (
-  command: Command,
-  ...args: (string | number)[]
-) => {
+export type TArgs = (string | number)[];
+
+export const fetchRedis = async <TResult>(
+  command: TCommand,
+  ...args: TArgs
+): Promise<TResult> => {
   const commandUrl = `${upstashBaseUrl}/${command}/${args.join('/')}`;
   const response = await fetch(commandUrl, {
     headers: {
@@ -20,6 +22,6 @@ export const fetchRedis = async (
     throw new Error('Failed to fetch data from Redis');
   }
 
-  const data = (await response.json()) as { result: string | null };
+  const data = (await response.json()) as { result: TResult };
   return data.result;
 };
